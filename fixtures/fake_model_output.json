@@ -1,0 +1,35 @@
+{
+  "comment": "Canned output of the FAKE adapter for offline testing: a perfect extraction of fixtures/invoices/invoice-001.xml with three deliberate formatting quirks (spaced IBAN, uncertain-wrapper on bt-9, DE date format on bt-2) that scoring normalization must handle.",
+  "predicted": {
+    "bt-1": "RE-2026-0417",
+    "bt-2": "15.01.2026",
+    "bt-3": "380",
+    "bt-5": "EUR",
+    "bt-9": {"value": "29.01.2026", "uncertain": true},
+    "bt-10": "KUNDENREF-0815",
+    "bt-20": "Zahlbar innerhalb von 14 Tagen",
+    "bt-27": "Süddeutsche Systemtechnik GmbH",
+    "bg-5": {"bt-35": "Bahnhofstraße 7", "bt-37": "München", "bt-38": "80331", "bt-40": "DE"},
+    "bt-31": "DE123456789",
+    "bt-44": "Nordlicht Logistik GmbH & Co. KG",
+    "bg-8": {"bt-50": "Hafenstraße 42", "bt-52": "Hamburg", "bt-53": "20359", "bt-55": "DE"},
+    "bt-48": "not_found",
+    "bg-16": {"bt-82": "58", "bt-84": "DE89 3704 0044 0532 0130 00", "bt-86": "COBADEFFXXX"},
+    "bg-25": [
+      {"bt-126": "1", "bt-153": "Entwicklungsleistung API-Integration", "bt-129": "12", "bt-130": "HUR", "bt-146": "85.00", "bt-131": "1020.00", "bt-151": "S", "bt-152": "19.00"},
+      {"bt-126": "2", "bt-153": "Managed Hosting Premium (12 Monate)", "bt-129": "1", "bt-130": "MON", "bt-146": "480.00", "bt-131": "480.00", "bt-151": "S", "bt-152": "19.00"},
+      {"bt-126": "3", "bt-153": "Schulung XRechnung", "bt-129": "4", "bt-130": "HUR", "bt-146": "150.00", "bt-131": "600.00", "bt-151": "S", "bt-152": "19.00"}
+    ],
+    "bg-23": [
+      {"bt-120": "S", "bt-116": "2100.00", "bt-117": "399.00", "bt-119": "19.00"}
+    ],
+    "bg-22": {
+      "bt-106": "2100.00",
+      "bt-109": "2100.00",
+      "bt-110": "399.00",
+      "bt-112": "2499.00",
+      "bt-113": null,
+      "bt-115": "2499.00"
+    }
+  }
+}

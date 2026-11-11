@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fixture: SVRL fragment (schematron-output) as embedded in KoSIT reports.
+     Parser must resolve failed-assert elements namespace-agnostically. -->
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xs="http://www.w3.org/2001/XMLSchema" title="EN 16931 &amp; XRechnung 3.0.2 Rules" schemaVersion="">
+  <svrl:active-pattern document="invoice-broken.xml"/>
+  <svrl:fired-rule context="/rsm:CrossIndustryInvoice"/>
+  <svrl:failed-assert test="ram:GrandTotalAmount = ram:TaxBasisTotalAmount + ram:TaxTotalAmount" id="BR-CO-15" flag="fatal" role="error" location="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation">
+    <svrl:text>[BR-CO-15]-Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110).</svrl:text>
+  </svrl:failed-assert>
+  <svrl:failed-assert test="ram:BuyerReference" id="BR-DE-1" flag="error" role="error" location="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference">
+    <svrl:text>[BR-DE-1]-In der XRechnung muss die Leitweg-ID als Buyer Reference (BT-10) uebermittelt werden.</svrl:text>
+  </svrl:failed-assert>
+</svrl:schematron-output>

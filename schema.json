@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Gjusev/xrechnung-bench/schema.json",
+  "title": "xbench EN 16931 subset — model output contract (v1)",
+  "description": "Structured JSON that every model adapter MUST return. models/xml_builder.py turns this into XRechnung 3.0.2 (CII D16B) XML. Models NEVER write XML directly. Field keys are EN 16931 Business Terms; the numbering below was verified against the standard's own rule texts (BR-12..BR-15, BR-CO-10..17, BR-09/11, BR-22..27) on 2026-11-12.",
+  "type": "object",
+  "required": ["bt-1", "bt-2", "bt-3", "bt-5", "bt-27", "bg-5", "bg-25", "bg-22"],
+  "properties": {
+    "bt-1":  {"type": "string", "description": "Invoice number", "examples": ["RE-2026-0417"]},
+    "bt-2":  {"type": "string", "description": "Invoice issue date. Ground truth ISO 8601; predictions in DE format (DD.MM.YYYY) are accepted and normalized by scoring."},
+    "bt-3":  {"type": "string", "description": "Invoice type code", "x-codes": ["380 commercial invoice", "381 credit note"]},
+    "bt-5":  {"type": "string", "description": "Invoice currency code", "examples": ["EUR"]},
+    "bt-9":  {"type": ["string", "null"], "description": "Payment due date (optional; conditional on payment terms, BR-CO-25)"},
+    "bt-10": {"type": ["string", "null"], "description": "Buyer reference — the Leitweg-ID in German B2G (mandatory in XRechnung, BR-DE-15)"},
+    "bt-20": {"type": ["string", "null"], "description": "Payment terms text"},
+    "bt-27": {"type": "string", "description": "Seller name"},
+    "bg-5":  {"$ref": "#/$defs/address-seller", "description": "Seller postal address"},
+    "bt-31": {"type": ["string", "null"], "description": "Seller VAT identifier (DE…), BR-CO-09 country prefix"},
+    "bt-44": {"type": "string", "description": "Buyer name"},
+    "bg-8":  {"$ref": "#/$defs/address-buyer", "description": "Buyer postal address"},
+    "bt-48": {"type": ["string", "null"], "description": "Buyer VAT identifier (often absent in B2G — used for the hallucination metric)"},
+    "bg-16": {"$ref": "#/$defs/payment-means", "description": "Payment means / payee account"},
+    "bg-25": {"type": "array", "description": "Invoice lines", "items": {"$ref": "#/$defs/line"}},
+    "bg-23": {"type": "array", "description": "VAT breakdown (one entry per VAT category)", "items": {"$ref": "#/$defs/vat-breakdown"}},
+    "bg-22": {"$ref": "#/$defs/totals", "description": "Document totals"}
+  },
+  "$defs": {
+    "address-seller": {
+      "type": "object",
+      "properties": {
+        "bt-35": {"type": "string", "description": "Seller address line 1"},
+        "bt-37": {"type": "string", "description": "Seller city"},
+        "bt-38": {"type": "string", "description": "Seller postcode"},
+        "bt-40": {"type": "string", "description": "Seller country code (mandatory, BR-09)", "examples": ["DE"]}
+      },
+      "required": ["bt-37", "bt-40"]
+    },
+    "address-buyer": {
+      "type": "object",
+      "properties": {
+        "bt-50": {"type": "string", "description": "Buyer address line 1"},
+        "bt-52": {"type": "string", "description": "Buyer city"},
+        "bt-53": {"type": "string", "description": "Buyer postcode"},
+        "bt-55": {"type": "string", "description": "Buyer country code (mandatory, BR-11)", "examples": ["DE"]}
+      },
+      "required": ["bt-52", "bt-55"]
+    },
+    "payment-means": {
+      "type": "object",
+      "properties": {
+        "bt-82": {"type": "string", "description": "Payment means type code (58 = SEPA credit transfer)"},
+        "bt-84": {"type": ["string", "null"], "description": "Payee account identifier (IBAN)"},
+        "bt-86": {"type": ["string", "null"], "description": "Payee financial institution (BIC)"}
+      }
+    },
+    "line": {
+      "type": "object",
+      "properties": {
+        "bt-126": {"type": "string", "description": "Invoice line number"},
+        "bt-153": {"type": "string", "description": "Item name (BR-25)"},
+        "bt-129": {"type": "string", "description": "Invoiced quantity (BR-22)"},
+        "bt-130": {"type": "string", "description": "Invoiced quantity unit of measure code (BR-23): C62 piece, HUR hour, MON month"},
+        "bt-146": {"type": "string", "description": "Item net price (BR-26)"},
+        "bt-131": {"type": "string", "description": "Invoice line net amount (BR-24)"},
+        "bt-151": {"type": "string", "description": "Invoiced item VAT category code (BR-CO-04)"},
+        "bt-152": {"type": "string", "description": "Invoiced item VAT rate"}
+      }
+    },
+    "vat-breakdown": {
+      "type": "object",
+      "properties": {
+        "bt-116": {"type": "string", "description": "VAT category taxable amount"},
+        "bt-117": {"type": "string", "description": "VAT category tax amount (= BT-116 x BT-119/100, BR-CO-17)"},
+        "bt-119": {"type": "string", "description": "VAT category rate"},
+        "bt-120": {"type": "string", "description": "VAT category code (S standard, AE reverse charge, E exempt, Z zero)"}
+      }
+    },
+    "totals": {
+      "type": "object",
+      "properties": {
+        "bt-106": {"type": "string", "description": "Sum of invoice line net amounts (BR-12)"},
+        "bt-109": {"type": "string", "description": "Invoice total amount without VAT (BR-13)"},
+        "bt-110": {"type": "string", "description": "Invoice total VAT amount (= sum of BT-117, BR-CO-14)"},
+        "bt-112": {"type": "string", "description": "Invoice total amount with VAT (= BT-109 + BT-110, BR-CO-15)"},
+        "bt-113": {"type": ["string", "null"], "description": "Paid amount (optional)"},
+        "bt-115": {"type": "string", "description": "Amount due for payment (= BT-112 - BT-113 + BT-114, BR-CO-16)"}
+      }
+    }
+  },
+  "x-abstention": "Any field may be absent, null, the literal string \"not_found\", or an uncertainty wrapper {\"value\": x, \"uncertain\": true}. scoring treats all four as an abstention, reported as coverage vs accuracy-on-answered — never as a wrong guess.",
+  "x-normalization": "scoring/normalize.py compares amounts with Decimal and a ±0.01 tolerance, dates in ISO or DD.MM.YYYY, IBANs stripped of spaces and uppercased, VAT ids uppercased, names casefolded."
+}

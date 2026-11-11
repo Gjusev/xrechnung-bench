@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fixture modeled on the per-document report the KoSIT validator (v1.6.3) writes
+     as <doc>-report.xml next to the checked file. Attribute names were written from
+     the documented report structure; if the live validator on the main PC emits a
+     different attribute name, adjust models/validator.py (tolerant parser) and
+     regenerate this fixture from real output. See NOTES.md. -->
+<report>
+  <scenario id="cii2xr" name="Calculation check against EN 16931 &amp; XRechnung 3.0.2"/>
+  <document index="1" file="invoice-001.xml" scenario="cii2xr" verdict="valid" errors="0" warnings="1" notices="0" durationMs="2451">
+    <assertion type="warning" id="BR-DE-31" flag="warning" location="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans">Feld BT-86 (BICID): In der XRechnung darf die Kennung des Zahlungsdienstleisters angegeben werden.</assertion>
+  </document>
+</report>

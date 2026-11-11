@@ -1,0 +1,12 @@
+# generated artifacts (deterministically reproducible — `xbench generate`)
+corpus/
+results/*.jsonl
+results/leaderboard.json
+results/leaderboard.md
+
+# validator binaries (downloaded per docs/MAIN-PC.md, pinned in the docs)
+tools/
+
+__pycache__/
+*.pyc
+.pytest_cache/

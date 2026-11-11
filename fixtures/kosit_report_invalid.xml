@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fixture: per-document KoSIT validator report for a document that FAILS acceptance.
+     Models the SVRL-style failed assertions with rule ids and severities. -->
+<report>
+  <scenario id="cii2xr" name="Calculation check against EN 16931 &amp; XRechnung 3.0.2"/>
+  <document index="1" file="invoice-broken.xml" scenario="cii2xr" verdict="invalid" errors="2" warnings="0" notices="0" durationMs="2287">
+    <assertion type="error" id="BR-CO-15" flag="fatal" location="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation">[BR-CO-15]-Invoice total amount with VAT (BT-112) = Invoice total amount without VAT (BT-109) + Invoice total VAT amount (BT-110).</assertion>
+    <assertion type="error" id="BR-DE-1" flag="error" location="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference">[BR-DE-1]-In der XRechnung muss die Leitweg-ID als Buyer Reference (BT-10) uebermittelt werden.</assertion>
+  </document>
+</report>
