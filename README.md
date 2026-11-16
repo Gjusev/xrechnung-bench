@@ -4,6 +4,21 @@
 [![python](https://img.shields.io/badge/python-3.10%2B-blue)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo-animated-dark.svg">
+    <img src="assets/logo/logo-animated-light.svg" alt="xrechnung-bench: invoice to structured XML to the validator's stamp" width="560">
+  </picture>
+</p>
+
+<p align="center">
+  <a href="assets/video/xrechnung-bench.mp4">
+    <img src="assets/video/preview.gif" alt="An invoice sheet flows into code brackets, then an amber validator stamp ticks the result" width="720">
+  </a>
+  <br>
+  <sub><a href="assets/video/xrechnung-bench.mp4">Watch the 8-second film (MP4, 0.1 MB)</a>. Every number in it comes from the committed results in this repo.</sub>
+</p>
+
 An open benchmark measuring whether **local vision models** can convert German
 invoices (PDF/scans) into **valid XRechnung 3.0.2** — checked with the official
 **KoSIT validator**, scored per EN 16931 business term (BT), with arithmetic
