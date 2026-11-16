@@ -1,5 +1,9 @@
 # xrechnung-bench
 
+[![tests](https://github.com/Gjusev/xrechnung-bench/actions/workflows/tests.yml/badge.svg)](https://github.com/Gjusev/xrechnung-bench/actions/workflows/tests.yml)
+[![python](https://img.shields.io/badge/python-3.10%2B-blue)]()
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 An open benchmark measuring whether **local vision models** can convert German
 invoices (PDF/scans) into **valid XRechnung 3.0.2** — checked with the official
 **KoSIT validator**, scored per EN 16931 business term (BT), with arithmetic
