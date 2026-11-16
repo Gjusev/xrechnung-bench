@@ -13,10 +13,10 @@
 
 <p align="center">
   <a href="assets/video/xrechnung-bench.mp4">
-    <img src="assets/video/preview.gif" alt="An invoice sheet flows into code brackets, then an amber validator stamp ticks the result" width="720">
+    <img src="assets/video/preview.gif" alt="xrechnung-bench: the animated mark beside the headline number, 360 synthetic invoices across 4 difficulty tiers" width="720">
   </a>
   <br>
-  <sub><a href="assets/video/xrechnung-bench.mp4">Watch the 8-second film (MP4, 0.1 MB)</a>. Every number in it comes from the committed results in this repo.</sub>
+  <sub><a href="assets/video/xrechnung-bench.mp4">Watch the 8-second film (MP4, 0.2 MB)</a>. Every number in it comes from the committed results in this repo.</sub>
 </p>
 
 An open benchmark measuring whether **local vision models** can convert German
